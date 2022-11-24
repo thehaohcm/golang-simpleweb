@@ -6,7 +6,7 @@ import (
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("<h1>Hello World! This is a simple page written in Golang</h1>"))
+	w.Write([]byte("<h1>Hello World! This is a simple page written in Golang - 1</h1>"))
 }
 
 func main() {

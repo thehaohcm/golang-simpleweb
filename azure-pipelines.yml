@@ -28,6 +28,23 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
+    - task: SonarCloudPrepare@1
+      displayName: 'Prepare analysis on SonarCloud'
+      inputs:
+        SonarCloud: 'sonarcloud-conn'
+        organization: 'thehaohcm-organization'
+        scannerMode: 'CLI'
+        configMode: 'manual'
+        cliProjectKey: 'thehaohcm_golang-simpleweb'
+        cliProjectName: 'golang-simpleweb'
+        cliSources: '.'
+    - task: SonarCloudAnalyze@1
+      displayName: 'Run Code Analysis'
+    
+    - task: SonarCloudPublish@1
+      inputs:
+        pollingTimeoutSec: '300'
+    
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:

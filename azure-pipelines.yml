@@ -56,7 +56,7 @@ stages:
 - stage: UATDeploy
   displayName: Deploy into UAT server
   jobs:
-  - deployment: Deploy container image into UAT Server
+  - deployment: 'Deploy container image into UAT Server'
     environment: 'uat-deploy-approval'
     strategy:
       runOnce:
@@ -74,7 +74,7 @@ stages:
 - stage: PRODDeploy
   displayName: Deploy into PRODUCT server
   jobs:
-  - deployment: Deploy container image into PRODUCT server
+  - deployment: 'Deploy container image into PRODUCT server'
     environment: 'prod-deploy-approval'
     strategy:
       runOnce:

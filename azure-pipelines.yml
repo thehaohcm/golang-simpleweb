@@ -56,21 +56,18 @@ stages:
 - stage: UATDeploy
   displayName: Deploy into UAT server
   jobs:
-  - deployment: UAT_Server
-    environment: 'uat-deploy-approval'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureRmWebAppDeployment@4
-            displayName: 'Azure App Service Deploy: uat-deploy-test1'
-            inputs:
-              azureSubscription: 'Azure subscription 1 (63b30e78-e8f8-4e25-8ece-3cc63e2199cc)'
-              appType: webAppContainer
-              WebAppName: 'uat-deploy-test1'
-              DockerNamespace: qtrungtestcr.azurecr.io
-              DockerRepository: golangsimpleweb
-              DockerImageTag: latest
+  - job: Deploy
+    displayName: Deploy container image into UAT server
+    steps:
+    - task: AzureRmWebAppDeployment@4
+      displayName: 'Azure App Service Deploy: uat-deploy-test1'
+      inputs:
+        azureSubscription: 'Azure subscription 1 (63b30e78-e8f8-4e25-8ece-3cc63e2199cc)'
+        appType: webAppContainer
+        WebAppName: 'uat-deploy-test1'
+        DockerNamespace: qtrungtestcr.azurecr.io
+        DockerRepository: golangsimpleweb
+        DockerImageTag: latest
 - stage: PRODDeploy
   displayName: Deploy into PRODUCT server
   jobs:
